@@ -37,6 +37,7 @@ delta  <- 1 / n
 q_star  <-  0.5
 r  <- 0.04
 s_bono  <- 100
+dias_por_ano  <- 360
 
 # Calculamos la serie de precios del bono
 s_bono_k  <- s_bono * exp(r * (0:(n - 1)) * delta)
@@ -49,5 +50,22 @@ df_bono  <- data.frame(
 # Calculamos el retorno logaritmico
 df_apple  <- df_apple  %>%
     arrange(Date)  %>%
-    mutate(log_return = log(Close / lag(Close)))  %>%
+    mutate(log_return = log(Close / lag(Close)))  %>% 
     drop_na()
+
+# Calculamos el retorno logaritmico anualizado
+df_apple  <- df_apple  %>%
+    mutate(log_return_annualized_SG = log_return * dias_por_ano,
+            log_return_annualized_NL = log(Close/lag(Close, n = dias_por_ano)))  %>% 
+            drop_na()
+
+# Calculamos la volatilidad anualizada
+
+cat("\nVolatilidad anualizada: sd(log(Close/Close_{-1}))*sqrt(", dias_por_ano, "):\n")
+sd(df_apple$log_return) * sqrt(dias_por_ano)
+
+cat("\nVolatilidad anualizada: sd(log_return * (", dias_por_ano, ")):\n")
+sd(df_apple$log_return_annualized_SG)
+
+cat("\nVolatilidad anualizada: sd(log(Close/Close_{", dias_por_ano, "}))\n")
+sd(df_apple$log_return_annualized_NL)
