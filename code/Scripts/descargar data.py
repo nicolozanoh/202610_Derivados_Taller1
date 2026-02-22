@@ -6,7 +6,6 @@ df = ticker.history(period="max")
 
 df = df.reset_index()
 df["Date"] = df["Date"].dt.tz_localize(None)
-
 carpeta = os.getcwd().split("\\")[-1].upper()
 while carpeta != "202610_DERIVADOS_TALLER1":
     os.chdir("..")
