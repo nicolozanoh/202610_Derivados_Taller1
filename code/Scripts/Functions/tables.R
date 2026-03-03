@@ -4,19 +4,13 @@ library(kableExtra)
 calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly, u, d, b_0, ko){
 
   params_table <- data.frame(
-    Category = c(
-      "Market \\& Tree", "", "", "", "",
-      "Volatility", "", "", "",
-      "Bond", "",
-      "Options", "", ""
-    ),
     Parameter = c(
-      "Initial stock price", "Steps (periods)", "Time step", 
-      "Risk-neutral prob.", "Risk-free rate",
-      "Trading days/year", "Annualized volatility", 
-      "Up factor", "Down factor",
-      "Initial bond price", "Bond growth rate",
-      "Strike (Put Am. \\& KO)", "Knock-out barrier", "Strike (Chooser)"
+      "Precio inicial de la acción", "Número de pasos", "Tamaño del paso",
+      "Probabilidad riesgo-neutral", "Tasa libre de riesgo",
+      "Días de trading/año", "Volatilidad anualizada",
+      "Factor alcista", "Factor bajista",
+      "Precio inicial del bono", "Tasa de crecimiento del bono",
+      "Strike (Put Am. y KO)", "Barrera knock-out", "Strike (Chooser)"
     ),
     Symbol = c(
       "$S_0$", "$n$", "$\\delta$", "$q^*$", "$r$",
@@ -25,9 +19,9 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
       "$K$", "$KO$", "$K$"
     ),
     Value = c(
-      s_0, n, round(delta, 4), q_star, r,
-      dias_por_ano, sd_yearly, round(u, 6), round(d, 6),
-      b_0, r,
+      round(s_0,2), round(n), round(delta, 2), round(q_star,2), round(r,2),
+      round(dias_por_ano), round(sd_yearly,2), round(u, 2), round(d, 2),
+      round(b_0), round(r),
       300, ko, 310
     )
   )
@@ -37,29 +31,27 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
     format    = "latex",
     booktabs  = TRUE,
     escape    = FALSE,
-    col.names = c("Category", "Parameter", "Symbol", "Value"),
-    caption   = "Model Parameters -- Binomial Tree Option Pricing",
-    label     = "tab:parameters"
+    col.names = c("Parámetro", "Símbolo", "Valor"),
+    caption   = "Parámetros del Modelo -- Árbol Binomial de Valoración de Opciones",
+    label     = "tab:parametros",
+    align     = c("l", "c", "r")
   ) %>%
     kable_styling(latex_options = c("hold_position")) %>%
-    collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>%
-    pack_rows("Market & Tree", 1, 5) %>%
-    pack_rows("Volatility",    6, 9) %>%
-    pack_rows("Bond",         10, 11) %>%
-    pack_rows("Options",      12, 14) %>%
+    pack_rows("Mercado y Árbol", 1, 5,  bold = TRUE, latex_gap_space = "0.5em") %>%
+    pack_rows("Volatilidad",     6, 9,  bold = TRUE, latex_gap_space = "0.5em") %>%
+    pack_rows("Bono",           10, 11, bold = TRUE, latex_gap_space = "0.5em") %>%
+    pack_rows("Opciones",       12, 14, bold = TRUE, latex_gap_space = "0.5em") %>%
     footnote(
       general = paste0(
-        "All options have maturity $T = 1$ year. ",
-        "Volatility corresponds to AAPL over 2025-01-01 to 2026-02-13."
+        "Todas las opciones tienen vencimiento $T = 1$ año. ",
+        "La volatilidad corresponde a AAPL durante el período 2025-01-01 a 2026-02-13."
       ),
-      escape         = FALSE,
-      general_title  = "Notes:",
+      escape            = FALSE,
+      general_title     = "\\textit{Notas:}",
       footnote_as_chunk = TRUE
     )
   
-  # Print to console
-  cat(latex_table)
+
   
-  # Or save to file
   writeLines(latex_table, "output/parameters_table.tex")
 }

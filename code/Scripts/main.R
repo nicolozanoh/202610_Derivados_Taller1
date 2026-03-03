@@ -71,8 +71,6 @@ d <- calcular_d(r, q_star, n, sd_yearly)
 u
 d
 
-calibration_table(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly, u, d, b_0, ko)
-
 # Calculamos el precio de la accion de booble en cada nodo
 arbol_booble <- construir_arbol_accion(s_0, u, d, n, delta)
 
@@ -90,5 +88,9 @@ arbol_b <- valorar_opcion(arbol_booble, "PUTAM", n, q_star, r, delta, k, ko)
 arbol_bb <- valorar_opcion(arbol_booble, "PUTEU", n, q_star, r, delta, k, ko)
 
 # Chooser ar the money
-k <- 310
-arbol_b <- valorar_opcion(arbol_booble, "CHOOSER", n, q_star, r, delta, k, ko)
+#k <- 310
+#arbol_b <- valorar_opcion(arbol_booble, "CHOOSER", n, q_star, r, delta, k, ko)
+
+# sacamos tablas para el documento
+
+calibration_table(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly, u, d, b_0, ko)

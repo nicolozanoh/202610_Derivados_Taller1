@@ -1,47 +1,34 @@
 \begin{table}[!h]
 \centering
-\caption{\label{tab:tab:parameters}Model Parameters -- Binomial Tree Option Pricing}
+\caption{\label{tab:tab:parametros}Parámetros del Modelo -- Árbol Binomial de Valoración de Opciones}
 \centering
-\begin{tabular}[t]{lllr}
+\begin{tabular}[t]{lcr}
 \toprule
-Category & Parameter & Symbol & Value\\
+Parámetro & Símbolo & Valor\\
 \midrule
-\addlinespace[0.3em]
-\multicolumn{4}{l}{\textbf{Market \& Tree}}\\
-\hspace{1em}Market \& Tree & Initial stock price & $S_0$ & 300.000000\\
-\cmidrule{1-4}
-\hspace{1em} & Steps (periods) & $n$ & 12.000000\\
-
-\hspace{1em} & Time step & $\delta$ & 0.083300\\
-
-\hspace{1em} & Risk-neutral prob. & $q^*$ & 0.500000\\
-
-\hspace{1em}\multirow{-4}{*}{\raggedright\arraybackslash } & Risk-free rate & $r$ & 0.040000\\
-\cmidrule{1-4}
-\addlinespace[0.3em]
-\multicolumn{4}{l}{\textbf{Volatility}}\\
-\hspace{1em}Volatility & Trading days/year & -- & 252.000000\\
-\cmidrule{1-4}
-\hspace{1em} & Annualized volatility & $\sigma$ & 0.320000\\
-
-\hspace{1em} & Up factor & $u$ & 1.148513\\
-
-\hspace{1em}\multirow{-3}{*}{\raggedright\arraybackslash } & Down factor & $d$ & -1.068513\\
-\cmidrule{1-4}
-\addlinespace[0.3em]
-\multicolumn{4}{l}{\textbf{Bond}}\\
-\hspace{1em}Bond & Initial bond price & $B_0$ & 100.000000\\
-\cmidrule{1-4}
-\hspace{1em} & Bond growth rate & $r$ & 0.040000\\
-\cmidrule{1-4}
-\addlinespace[0.3em]
-\multicolumn{4}{l}{\textbf{Options}}\\
-\hspace{1em}Options & Strike (Put Am. \& KO) & $K$ & 300.000000\\
-\cmidrule{1-4}
-\hspace{1em} & Knock-out barrier & $KO$ & 240.000000\\
-
-\hspace{1em}\multirow{-2}{*}{\raggedright\arraybackslash } & Strike (Chooser) & $K$ & 310.000000\\
+\addlinespace[0.5em]
+\multicolumn{3}{l}{\textbf{Mercado y Árbol}}\\
+\hspace{1em}Precio inicial de la acción & $S_0$ & 300.00\\
+\hspace{1em}Número de pasos & $n$ & 12.00\\
+\hspace{1em}Tamaño del paso & $\delta$ & 0.08\\
+\hspace{1em}Probabilidad riesgo-neutral & $q^*$ & 0.50\\
+\hspace{1em}Tasa libre de riesgo & $r$ & 0.04\\
+\addlinespace[0.5em]
+\multicolumn{3}{l}{\textbf{Volatilidad}}\\
+\hspace{1em}Días de trading/año & -- & 252.00\\
+\hspace{1em}Volatilidad anualizada & $\sigma$ & 0.32\\
+\hspace{1em}Factor alcista & $u$ & 1.15\\
+\hspace{1em}Factor bajista & $d$ & -1.07\\
+\addlinespace[0.5em]
+\multicolumn{3}{l}{\textbf{Bono}}\\
+\hspace{1em}Precio inicial del bono & $B_0$ & 100.00\\
+\hspace{1em}Tasa de crecimiento del bono & $r$ & 0.00\\
+\addlinespace[0.5em]
+\multicolumn{3}{l}{\textbf{Opciones}}\\
+\hspace{1em}Strike (Put Am. y KO) & $K$ & 300.00\\
+\hspace{1em}Barrera knock-out & $KO$ & 240.00\\
+\hspace{1em}Strike (Chooser) & $K$ & 310.00\\
 \bottomrule
-\multicolumn{4}{l}{\rule{0pt}{1em}\textit{Notes:} All options have maturity $T = 1$ year. Volatility corresponds to AAPL over 2025-01-01 to 2026-02-13.}\\
+\multicolumn{3}{l}{\rule{0pt}{1em}\textit{textit{Notas:}} Todas las opciones tienen vencimiento $T = 1$ año. La volatilidad corresponde a AAPL durante el período 2025-01-01 a 2026-02-13.}\\
 \end{tabular}
 \end{table}
