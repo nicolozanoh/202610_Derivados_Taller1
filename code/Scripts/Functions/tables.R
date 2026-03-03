@@ -26,6 +26,8 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
     )
   )
   
+  params_table$Value <- formatC(params_table$Value, format = "f", digits = 2)
+  
   latex_table <- kable(
     params_table,
     format    = "latex",
@@ -33,7 +35,7 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
     escape    = FALSE,
     col.names = c("Parámetro", "Símbolo", "Valor"),
     caption   = "Parámetros del Modelo -- Árbol Binomial de Valoración de Opciones",
-    label     = "tab:parametros",
+    label     = "parametros",       
     align     = c("l", "c", "r")
   ) %>%
     kable_styling(latex_options = c("hold_position")) %>%
@@ -42,15 +44,11 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
     pack_rows("Bono",           10, 11, bold = TRUE, latex_gap_space = "0.5em") %>%
     pack_rows("Opciones",       12, 14, bold = TRUE, latex_gap_space = "0.5em") %>%
     footnote(
-      general = paste0(
-        "Todas las opciones tienen vencimiento $T = 1$ año. ",
-        "La volatilidad corresponde a AAPL durante el período 2025-01-01 a 2026-02-13."
-      ),
+      general           = "Todas las opciones tienen vencimiento $T = 1$ a\\\\~no. La volatilidad corresponde a AAPL durante el per\\'iodo 2025-01-01 a 2026-02-13.",
       escape            = FALSE,
-      general_title     = "\\textit{Notas:}",
+      general_title     = "\\\\textit{Notas:} ",
       footnote_as_chunk = TRUE
     )
-  
 
   
   writeLines(latex_table, "output/parameters_table.tex")
