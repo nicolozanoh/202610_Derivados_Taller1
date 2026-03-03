@@ -42,13 +42,7 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
     pack_rows("Mercado y Árbol", 1, 5,  bold = TRUE, latex_gap_space = "0.5em") %>%
     pack_rows("Volatilidad",     6, 9,  bold = TRUE, latex_gap_space = "0.5em") %>%
     pack_rows("Bono",           10, 11, bold = TRUE, latex_gap_space = "0.5em") %>%
-    pack_rows("Opciones",       12, 14, bold = TRUE, latex_gap_space = "0.5em") %>%
-    footnote(
-      general           = "Todas las opciones tienen vencimiento $T = 1$ a\\\\~no. La volatilidad corresponde a AAPL durante el per\\'iodo 2025-01-01 a 2026-02-13.",
-      escape            = FALSE,
-      general_title     = "\\\\textit{Notas:} ",
-      footnote_as_chunk = TRUE
-    )
+    pack_rows("Opciones",       12, 14, bold = TRUE, latex_gap_space = "0.5em")
 
   
   writeLines(latex_table, "output/parameters_table.tex")
