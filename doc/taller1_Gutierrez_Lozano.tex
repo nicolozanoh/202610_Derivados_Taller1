@@ -1,0 +1,719 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{dcolumn}
+\usepackage{geometry}
+\usepackage{breqn}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{mathrsfs}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[spanish,es-lcroman]{babel}
+\decimalpoint
+\usepackage{enumerate}
+\usepackage{nicefrac} 
+\usepackage[most]{tcolorbox}
+\usepackage{tcolorbox} % For solution boxes
+%\decimalpoint
+\setlength\parindent{0pt}
+\usepackage{enumitem}
+\newcommand*{\QED}{\hfill\ensuremath{\blacksquare}}
+\usepackage{authblk}
+\selectlanguage{spanish}
+\geometry{letterpaper, margin=1in}
+\pagestyle{headings}
+\usepackage{amsthm} 
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corolario}[theorem]
+\newtheorem{lemma}[theorem]{Lema}
+\theoremstyle{remark}
+\newtheorem*{remark}{Considere}
+\DeclareUnicodeCharacter{2212}{-}
+\usepackage{epigraph}
+
+\usepackage[natbibapa]{apacite}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\tcbset{colback=blue!10, 
+    %colframe=green!45!black!20, 
+    colframe=blue!70!black!70, 
+    title=Soluci\'on,
+    fonttitle=\bfseries,  
+    coltitle=white,
+    standard jigsaw, opacityback=50, arc=0mm, breakable} 
+
+\newcommand{\ubar}[1]{\text{\b{$#1$}}}
+ 
+\theoremstyle{definition}
+\newtheorem{definition}{Definici\'on}[section]
+
+\title{\textbf{Derivados Financieros} \\ \textbf{Taller 1} }
+
+\author{Nicolas Lozano Huertas\thanks{\href{mailto:n.lozanoh@uniandes.edu.co?subject= Taller 1 Derivados Financieros}{Universidad de los Andes}} \and Samuel Gut\'ierrez Jaramillo}
+\date{2026-10}
+
+\begin{document}
+    \maketitle
+    \vspace{-1 cm}
+    \section{Estrategias de Cobertura de Portafolios Reales.}
+
+    \subsection{Estrategia de cobertura:}
+
+    Para la realización de la estrategia que garantiza un flujo de caja certero en pesos durante el año 2026, se realizó la adquisición de los siguientes instrumentos financieros, necesarios para conformar el portafolio que permite cumplir con el objetivo mencionado:
+
+\begin{table}[H]
+\centering
+\caption{Resumen de instrumentos derivados\footnotemark}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabularx}{\textwidth}{c l l c c c c c c}
+\toprule
+\textbf{N°} & 
+\textbf{Tipo de instrumento} & 
+\textbf{Posición} & 
+\textbf{Venc.} & 
+\textbf{Precio fwd o stk} & 
+\textbf{Denom.} & 
+\textbf{Cantidad} & 
+\textbf{Unidad} & 
+\textbf{Prima} \\
+\midrule
+
+1 & Futuro de oro  & En corto & abr-26 & 5.046 & USD & 3.200 & Onza tr & -- \\ 
+2 & Futuro de oro & En corto & jun-26 & 5.084 & USD & 4.500 & Onza tr & -- \\ 
+3 & Futuro de oro & En corto & ago-26 & 5.121 & USD & 3.500 & Onza tr & -- \\ 
+4 & Futuro de oro & En corto & oct-26 & 5.153 & USD & 3.700 & Onza tr & -- \\ 
+5 & Futuro de oro & En corto & dic-26 & 5.184 & USD & 3.000 & Onza tr & -- \\ 
+
+\midrule
+
+6 & Forward FX & En corto & abr-26 & 3.605 & COP/USD & 16.148.160 & USD & -- \\ 
+7 & Forward FX  & En corto & jun-26 & 3.657 & COP/USD & 22.877.550 & USD & -- \\ 
+8 & Forward FX & En corto & ago-26 & 3.711 & COP/USD & 17.924.550 & USD & -- \\ 
+9 & Forward/Futuro FX & En corto & oct-26 & 3.802 & COP/USD & 19.065.360 & USD & -- \\ 
+10 & Futuro FX & En corto & dic-26 & 3.932 & COP/USD & 15.551.400 & USD & -- \\ 
+
+\midrule
+
+11 & Opción call europea oro & Compra & jun-26 & 5.075 & USD & 500 & Onza tr & 269,4 \\ 
+\textit{12} & \textit{Opción call europea oro} & \textit{Venta} & \textit{jun-26} & \textit{5.075} & \textit{USD} & \textit{500} & \textit{Onza tr} & \textit{No dice} \\ 
+
+\bottomrule
+\end{tabularx}
+\end{table}
+\footnotetext{En general en este documento, se tomará para valores númericos el simbolo coma (,) como un décimal y el punto (.) como un seprador de miles.}
+
+La anterior tabla indica que fueron 11 instrumentos financieros en total adquiridos el pasado 13 de febrero con el fin de llevar a cabo la estrategia de cobertura. Cabe resaltar que el activo número 12 se consideraba como ya adquirido previamente por la Compañía GOLD, a través del acuerdo con la joyería de Houston. Cabe resaltar también que las posiciones descritas como "En corto" equivalen a transar los futuros o forwards desde el "Bid" y no desde el "ask", lo que se entiende como un compromiso de vender oro en el futuro al precio forward (fwd) registrado. Así como la columna de "Precio fwd o stk" en el caso de las opciones, registra el valor strike pactado en el contrato.\\
+
+Ahora, antes de revisar como se planean diseñar las transacciones y ejecuciones de los instrumentos a futuro, se revisará en otra tabla, las fuentes y clarificaciones metodológicas que se utilizaron para registrar la información de cada instrumento del portafolio:
+
+\begin{table}[H]
+\centering
+\caption{Fuentes de información por instrumento}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabularx}{0.75\textwidth}{c X}
+\toprule
+\textbf{N°} & \textbf{Fuente de información} \\
+\midrule
+
+1 & Bloomberg \\
+2 & Bloomberg \\
+3 & Bloomberg \\
+4 & Bloomberg \\
+5 & Bloomberg \\
+
+\midrule
+
+6 & Bloomberg (FX Bid) \\
+7 & Bloomberg (FX Bid) \\
+8 & Bloomberg (FX Bid) \\
+9 & Interpolación a través de combinación lineal de tasa implícita en pesos del forward de octubre y el futuro de diciembre utilizando la SOFR \\
+10 & Bolsa de Valores de Colombia (TRMZ26F) \\
+
+\midrule
+
+11 & Barchart \\
+\textit{12} & Se asume que GOLD ya había incurrido en la opción, ya existía en el enunciado. \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Con el fin de describir a detalle la operatividad de la estratégia, se pasará a registrar el efecto en los flujos de caja de cada una de las transacciones que se planea llevar a cabo para cada uno de los meses en dónde se produce oro. Para esto, se mostrará una tabla por cada mes, en dónde cada una de las filas representa una transacción (o posible transacción en el caso de las opciones, situación que será descrita). Mientras que en las columnas, la primera describirá bajo cual de los instrumentos financieros se realiza la transacción, en caso de que estos se utilicen, y el activo a transar. Mientras que las siguientes columnas identifican la moneda en la que se realiza la transacción, así como la cantidad y el precio. Para las últimas columnas, se registrarán los efectos de cada transacción en el flujo de caja de GOLD en términos de oro, dólares y pesos, para al final concluir con certeza los flujos netos con los que cierra GOLD la operación en términos de ingresos de cada uno de estos meses. Cabe resaltar que el precio spot del oro en el mes t, se representará como S(t).
+
+ \begin{itemize}
+     \item Febrero:
+
+     Para el mes de febrero, se debe pagar la prima de la opción call que se compra en el portafolio.
+
+\begin{table}[H]
+\centering
+\caption{Flujos correspondientes al mes de febrero}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l|c c c|c c c}
+\toprule
+\textbf{Febrero} & 
+\textbf{Moneda} & 
+\textbf{Cantidad} & 
+\textbf{Precio} & 
+\textbf{Flujo de oro} & 
+\textbf{Flujo de pesos} & 
+\textbf{Flujo de dólares} \\
+\midrule
+
+Compra de dólares en mercado spot 
+& USD 
+& 134.700 
+& 3.665 
+& -- 
+& -493.729.380 
+& 134.700 \\
+
+Compra call europea de oro (11) 
+& USD 
+& 5\footnotemark
+& 269,4 
+& -- 
+& -- 
+& -134.700 \\
+
+\midrule
+
+\textbf{Flujo neto} 
+&  
+&  
+&  
+& \textbf{0} 
+& \textbf{-493.729.380} 
+& \textbf{0} \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+\footnotetext{Las opciones de oro se comercian por cada 100 onzas de oro, de manera que 5 unidades de opción cubren 500oz de oro. No obstante el precio de la prima, se mantiene por onza al igual que el strike.}
+
+\item Abril:
+
+Para el mes de abril, la empresa cuenta con el acuerdo de vender su producción al precio de mercado, acción que se realizaría luego de producir el oro el último día del mes, con estos recursos recibidos se compra en el mercado la misma cantidad de oro, la cual procede a liqudarse a través del contrato de futuros con el instrumento (1). Esta transacción genera un flujo certero de 16,1 millones (M) de dólares, los cuales son liquidados a través del futuro de COP/USD que se había contratado en el instrumento (6), lo que generaría el flujo certero en pesos de 58,2 miles de millones (MM).
+
+\begin{table}[H]
+\centering
+\caption{Flujos correspondientes al mes de abril}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l|c c c|c c c}
+\toprule
+\textbf{Abril} & 
+\textbf{Moneda} & 
+\textbf{Cantidad} & 
+\textbf{Precio} & 
+\textbf{Flujo de oro} & 
+\textbf{Flujo de pesos} & 
+\textbf{Flujo de dólares} \\
+\midrule
+
+Producción de oro 
+&  
+&  
+&  
+& 3.200 
+& 0 
+& 0 \\
+
+Venta de oro a precio de mercado 
+& USD 
+& 3.200 
+& S(abr) 
+& -3.200 
+& 0 
+& 3.200*S(abr) \\
+
+Compra de oro a precio de mercado 
+& USD 
+& 3.200 
+& S(abr) 
+& 3.200 
+& 0 
+& -3.200*S(abr) \\
+
+Liquidación de futuro oro (1) 
+& USD 
+& 3.200 
+& 5.046 
+& -3.200 
+& 0 
+& 16.148.160 \\
+
+Liquidación futuro (6) venta de dólares 
+&  
+& 16.148.160 
+& 3.605 
+& 0 
+& 58.211.694.576 
+& -16.148.160 \\
+
+\midrule
+
+\textbf{Flujo neto} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{0} 
+& \textbf{58.211.694.576} 
+& \textbf{0} \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\item Junio:
+
+En el caso de las transacciones de junio, se cumple una lógica similar a la de abril, solo que únicamente se venderían al precio spot 4000 onzas de oro y sobran otras 500. Con lo obtenido de la transacción a precio de mercado, se recuperaría en el mercado las 4000 onzas de oro. Luego, ambas opciones se cancelarían mutuamente generando resultados neutros para el flujo de caja del mes independientemente del precio del oro, y se procedería a liquidar el futuro de oro pactado por 4500 onzas de oro y por 22,9 M de dólares. Generando un flujo de caja certero de 83,6 MM de pesos.
+
+\begin{table}[H]
+\centering
+\caption{Flujos correspondientes al mes de junio}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l|c c c|c c c}
+\toprule
+\textbf{Junio} & 
+\textbf{Moneda} & 
+\textbf{Cantidad} & 
+\textbf{Precio} & 
+\textbf{Flujo de oro} & 
+\textbf{Flujo de pesos} & 
+\textbf{Flujo de dólares} \\
+\midrule
+
+Producción de oro 
+&  &  &  & 4.500 & 0 & 0 \\
+
+Venta de oro a precio de mercado 
+& USD & 4.000 & S(jun) & -4.000 & 0 & 4.000*S(jun) \\
+
+Compra de oro a precio de mercado 
+& USD & 4.000 & S(jun) & 4.000 & 0 & -4.000*S(jun) \\
+
+\midrule
+\multicolumn{7}{c}{\textbf{Operaciones contingentes}} \\
+\multicolumn{7}{c}{Transacciones si $S(jun) > 5075$ (en caso contrario no se ejercen)} \\
+\midrule
+
+Liquidación de opción (12) venta de oro 
+& USD & 500 & 5.075 & -500 & 0 & 2.537.500 \\
+
+Liquidación de opción (11) compra de oro 
+& USD & 500 & 5.075 & 500 & 0 & -2.537.500 \\
+
+\midrule
+\multicolumn{7}{c}{\textbf{Resto de transacciones obligatorias}} \\
+\midrule
+
+Liquidación de futuro oro (2) 
+& USD & 4.500 & 5.084 & -4.500 & 0 & 22.877.550 \\
+
+Liquidación forward (7) venta de dólares 
+&  & 22.877.550 & 3.657 & 0 & 83.662.742.799 & -22.877.550 \\
+
+\midrule
+
+\textbf{Flujo neto} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{0} 
+& \textbf{83.662.742.799} 
+& \textbf{0} \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+\item Agosto: 
+
+Los siguientes meses guardan la misma estructura de operación presentada en abril.
+
+\begin{table}[H]
+\centering
+\caption{Flujos correspondientes al mes de agosto}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l|c c c|c c c}
+\toprule
+\textbf{Agosto} & 
+\textbf{Moneda} & 
+\textbf{Cantidad} & 
+\textbf{Precio} & 
+\textbf{Flujo de oro} & 
+\textbf{Flujo de pesos} & 
+\textbf{Flujo de dólares} \\
+\midrule
+
+Producción de oro 
+&  &  &  & 3.500 & 0 & 0 \\
+
+Venta de oro a precio de mercado 
+& USD & 3.500 & S(ago) & -3.500 & 0 & 3.500*S(ago) \\
+
+Compra de oro a precio de mercado 
+& USD & 3.500 & S(ago) & 3.500 & 0 & -3.500*S(ago) \\
+
+Liquidación de futuro oro (3) 
+& USD & 3.500 & 5.121 & -3.500 & 0 & 17.924.550 \\
+
+Liquidación futuro (8) venta de dólares 
+&  & 17.924.550 & 3.711 & 0 & 66.526.250.343 & -17.924.550 \\
+
+\midrule
+
+\textbf{Flujo neto} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{0} 
+& \textbf{66.526.250.343} 
+& \textbf{0} \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+\item Octubre:
+
+\begin{table}[H]
+\centering
+\caption{Flujos correspondientes al mes de octubre}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l|c c c|c c c}
+\toprule
+\textbf{Octubre} & 
+\textbf{Moneda} & 
+\textbf{Cantidad} & 
+\textbf{Precio} & 
+\textbf{Flujo de oro} & 
+\textbf{Flujo de pesos} & 
+\textbf{Flujo de dólares} \\
+\midrule
+
+Producción de oro 
+&  &  &  & 3.700 & 0 & 0 \\
+
+Venta de oro a precio de mercado 
+& USD & 3.700 & S(oct) & -3.700 & 0 & 3.700*S(oct) \\
+
+Compra de oro a precio de mercado 
+& USD & 3.700 & S(oct) & 3.700 & 0 & -3.700*S(oct) \\
+
+Liquidación de futuro oro (4) 
+& USD & 3.700 & 5.153 & -3.700 & 0 & 19.065.360 \\
+
+Liquidación futuro (9) venta de dólares 
+&  & 19.065.360 & 3.802 & 0 & 72.494.456.946 & -19.065.360 \\
+
+\midrule
+
+\textbf{Flujo neto} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{0} 
+& \textbf{72.494.456.946} 
+& \textbf{0} \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+\item Diciembre:
+
+\begin{table}[H]
+\centering
+\caption{Flujos correspondientes al mes de diciembre}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l|c c c|c c c}
+\toprule
+\textbf{Diciembre} & 
+\textbf{Moneda} & 
+\textbf{Cantidad} & 
+\textbf{Precio} & 
+\textbf{Flujo de oro} & 
+\textbf{Flujo de pesos} & 
+\textbf{Flujo de dólares} \\
+\midrule
+
+Producción de oro 
+&  &  &  & 3.000 & 0 & 0 \\
+
+Venta de oro a precio de mercado 
+& USD & 3.000 & S(dic) & -3-000 & 0 & 3.000*S(dic) \\
+
+Compra de oro a precio de mercado 
+& USD & 3.000 & S(dic) & 3.000 & 0 & -3.000*S(dic) \\
+
+Liquidación de futuro oro (5) 
+& USD & 3.000 & 5.184 & -3.000 & 0 & 15.551.400 \\
+
+Liquidación futuro (10) venta de dólares 
+&  & 15.551.400 & 3.932 & 0 & 61.154.636.388 & -15.551.400 \\
+
+\midrule
+
+\textbf{Flujo neto} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{} 
+& \textbf{0} 
+& \textbf{61.154.636.388} 
+& \textbf{0} \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+     
+ \end{itemize}
+
+ \subsection{Valor presente de la estratégia}
+
+ Luego de observar los flujos mes a mes generados por la estrategia diseñada, se procederá a completar el análisis a través del cálculo de tasas de no arbitraje con el fin de traducir los flujos encontrados a valor presente del 13 de febrero del 2026. Adicionalmente, se le restarán a los flujos encontrados los costos fijos y variables necesarios para mantener a flote la operación de extracción del oro, de manera que el cálculo del valor presente se hará con la utilidad del ejercicio luego de descontar dichos costos.\\
+
+ \textbf{Nota metodológica:} Antes de presentar los resultados, se describirá el proceso para el cálculo de las tasas libres de riesgo. En primer lugar se asume que no hay descuento de la operación realizada en febrero, sino que se toman los flujos de este mes como realizados en el día del análisis debido a que ese día se debían comprar las posiciónes, en particular la opción call.\\
+ 
+ Luego, para los meses entre marzo y agosto se utilizó el precio de los forwards del dólar obtenidos de la plataforma Bloomberg. Para obtener este precio, se tomo el punto medio entre el precio de Bid y Ask, considerandolo como la mejor aproximación posible a la Ley de un solo precio. Además, tomar un valor extremo en este rango entre el Bid y el Ask puede arrojar resultados contraintuitivos como tasas negativas. Una vez se tuvo este precio, se utilizó la Paridad Cubierta de Tasas de interés, o la formula de no arbitraje para forwards de divisas, utilizando tasas de interés continuas y constantes, con la tasa del dólar como la SOFR (3,66\%). Con esta aproximación, se despejó la tasa ímplicita en pesos. A continuación, la expresión matemática resultante del despeje.
+
+\[
+TLR_{t+h} = SOFR_t + \frac{ln\left(\frac{F_{t+h}}{TRM_t}\right)}{\left(\frac{\text{Días entre }_t\text{y}_h}{365}\right)}
+\]
+
+Dónde la tasa SOFR presentó un valor de 3,66\%, la TRM un valor de 3.665 y los días entre t y h se tomaron como la cantidad de días entre el 13 de febrero y el día del mes del vencimiento del forward encontrado \footnote{Si bien el ejercicio asume que las transacciones se dan el último día de cada mes, para el cálculo de la tasa se tomaron solamente los días hasta que se venciera el futuro encontrado para el mes en cuestión, dado que en las fuentes de información consultadas tendía a ofrecerse un solo vencimiento para cada mes}.\\
+
+Entre los siguientes meses, no se encontraron contratos futuros o forwards disponibles, sino hasta diciembre a través de la plataforma de la Bolsa de Valores de Colombia, mes para el cúal se realizó el cálculo de la tasa de la misma manera descrita anteriormente utilizada hasta agosto. Para los meses entre septiembre y noviembre, se realizó una interpolación lineal en las tasas libres de riesgo en pesos, procedimiento que ya se había aplicado para encontrar el precio forward del dólar en octubre para terminar de conformar el portafolio en la primera tabla. Sin embargo, en ese ejercicio previo se habían interpolado las tasas de las operaciones Bid, en este caso se realiza la interpolación con el punto medio entre las tasas Bid y Ask.\\
+
+Teniendo en cuenta las anteriores consideraciones, se procede a continuación a presentar los resultados de las utilidades incluyendo los costos, las tasas libres de riesgo y el resultado de la utilidad certera en valor presente para el 2026.
+
+\begin{table}[H]
+\centering
+\caption{Flujos totales por mes, tasas libres de riesgo en COP y valor presente de la utilidad}
+
+(Valores en MM COP, a exepción de precio fwd y tasa libre de riesgo.)
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l|rrrr|rr|r}
+\hline
+\textbf{Mes} & \textbf{Flujo estrategia} & \textbf{Costo variable} & \textbf{Costo fijo} & \textbf{Utilidad} & \textbf{Precio fwd USD} & \textbf{Tasa libre} & \textbf{Utilidad en VP\footnotemark} \\
+
+\hline
+feb-26 & -0,49 & - & 14,70 & -15,19 & 3.665 &  & -15,19 \\
+mar-26 & - & - & 14,70 & -14,70 & 3.678 & 7,45\% & -14,56 \\
+abr-26 & 58,21 & 8,00 & 14,70 & 35,51 & 3.703 & 9,18\% & 34,84 \\
+may-26 & - & - & 14,70 & -14,70 & 3.729 & 10,19\% & -14,27 \\
+jun-26 & 83,66 & 11,25 & 14,70 & 57,71 & 3.755 & 10,67\% & 55,45 \\
+jul-26 & - & - & 14,70 & -14,70 & 3.783 & 10,91\% & -13,98 \\
+ago-26 & 66,53 & 8,75 & 14,70 & 43,08 & 3.810 & 11,08\% & 40,55 \\
+sep-26 & - & - & 14,70 & -14,70 & 3.837 & 11,27\% & -13,70 \\
+oct-26 & 72,49 & 9,25 & 14,70 & 48,54 & 3.867 & 11,47\% & 44,74 \\
+nov-26 & - & - & 14,70 & -14,70 & 3.897 & 11,66\% & -13,40 \\
+dic-26 & 61,15 & 7,50 & 14,70 & 38,95 & 3.932 & 11,85\% & 35,09 \\
+\hline
+\textbf{Total} & \textbf{341,56} & \textbf{44,75} & \textbf{161,70} & \textbf{135,11} &  &  & \textbf{125,57} \\
+\hline
+\end{tabular}
+\end{table}
+\footnotetext{Valor presente de la utilidad a 13 de febrero del 2026, asumiendo que cada flujo se da el último día de cada mes, a excepción del mes de febrero en donde los flujos ocurren el día 13 de febrero dada la necesidad de pagar la prima}
+
+
+De esta manera, se concluye que, el valor completo en pesos de la utilidad en valor presente del 2026 es de: COP 125.574.473.264,33 (ciento veinticinco mil quinientos setenta y cuatro millones cuatrocientos setenta y tres mil doscientos sesenta y cuatro pesos).
+ 
+ 
+               
+        \newpage
+
+    \section{Valoraci\'on de Opciones: Modelo Binomial.}
+
+    \subsection{Calibraci\'on del modelo.}
+
+    En el anexo puede verificar el proceso mediante el cu\'al se encontraron las formulas para calibrar los par\'ametros $u$ y $d$ del modelo:
+
+    \begin{align}
+        u &= r + \left({1-p^{*}}\right)\sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} \\
+        d &=r- p^{*}\sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}}
+    \end{align}
+
+    Reemplazando $p^{*}= 0.5$, $r= 0.04$ y $N = 12$ obtenemos:
+
+    \begin{align}
+        u &= 0.04 + 2\sqrt{3}\cdot\sigma_{\text{aapl}} \\
+        d &= 0.04 - 2\sqrt{3}\cdot\sigma_{\text{aapl}} 
+    \end{align}
+ 
+    \subsection{Valoraci\'on opci\'on put americana}
+
+    \subsection{Valoraci\'on opci\'on put con knockout}
+
+    \subsection{Valoraci\'on \emph{chooser at-the-money}}
+
+    \newpage
+    
+    \section*{Anexo}
+    \subsection*{Derivaci\'on de las formulas para la calibraci\'on del modelo binomial.}
+
+    Partiendo de la probabilidad neutral al riesgo:
+
+    \begin{align*}
+        p^{*} &= \frac{e^{r\Delta t} - e ^ {d\Delta t}}{e^{u \Delta t} - e^{d \Delta t}} \\
+        p^{*} \left(e^{u \Delta t} - e^{d \Delta t} \right) &= e^{r\Delta t} - e ^ {d\Delta t} 
+    \end{align*}
+
+    Usando la aproximaci\'on de Taylor $e^{x} \approx 1+x$:
+
+    \begin{align*}
+        p^{*} \left(1 + u \Delta t - 1 - d \Delta t \right) &= 1+r\Delta t - 1 - d\Delta t \\
+        p^{*} \left(u \Delta t - d \Delta t \right) &= r\Delta t  - d\Delta t \\
+        p^{*} \Delta t\left(u - d \right) &= \Delta t \left(r  - d \right) \\
+        \left(u - d \right) &= \frac{\Delta t \left(r  - d\right)}{p^{*} \Delta t} \\
+         \left(u - d \right) &= \frac{\left(r  - d\right)}{p^{*}} 
+    \end{align*}
+
+
+    \begin{align}
+         u - d &= \frac{\left(r  - d\right)}{p^{*}}
+    \end{align}
+
+    Ahora, podemos definir el retorno logar\'itmico entre dos periodos como:
+
+    \begin{align*}
+       X= 
+        \begin{cases}
+            ln\left(\frac{Se^{u \Delta t}}{S}\right) = ln\left(e^{u\Delta t}\right) = u\Delta t \text{ , con probailidad } p^* \\
+            ln\left(\frac{Se^{d \Delta t}}{S}\right) = ln\left(e^{d\Delta t}\right) = d\Delta t \text{ , con probailidad } 1-p^*
+        \end{cases}
+    \end{align*}
+
+    Entonces el valor esperado del retorno logar\'itmico es:
+
+    \begin{align*}
+        E^{*}\left[X\right] &= p^{*}u\Delta t  + (1-p^{*})d\Delta t \\
+        E^{*}\left[X\right] &= \Delta t \left(p^{*}u+(1-p^{*})d\right)
+        %E^{*}\left[X\right] &=  \Delta t\left(p^{*}u+d-p^{*}d\right)
+    \end{align*}
+
+    El valor esperado del retorno al cuadrado es:
+
+    \begin{align*}
+        E^{*}\left[X^{2}\right] &= p^{*}u^{2}\Delta t^{2}  + (1-p^{*})d^{2}\Delta t^{2} \\
+        E^{*}\left[X^{2}\right] &=  \Delta t^{2}\left(p^{*}u^{2}+(1-p^{*})d^{2}\right)
+    \end{align*}
+
+    De esta manera podemos calcular la varianza del retorno como:
+
+    \begin{align*}
+        Var^{*}\left[X\right] &= \Delta t^{2}\left(p^{*}u^{2}+(1-p^{*})d^{2}\right) -\left(\Delta t \left(p^{*}u+(1-p^{*})d\right)\right)^{2} \\
+        Var^{*}\left[X\right] &= \Delta t^{2}\left(p^{*}u^{2}+(1-p^{*})d^{2}\right) -\left(\Delta t^{2} \left(p^{*}u+(1-p^{*})d\right)^{2}\right) \\
+        Var^{*}\left[X\right] &= \Delta t^{2}\left(p^{*}u^{2}+(1-p^{*})d^{2}\right) -\left(\Delta t^{2} \left(p^{*^2}u^{2}+2p^{*}(1-p^{*})du+(1-p^{*})^{2}d^{2}\right)\right) \\
+        Var^{*}\left[X\right] &= \Delta t^{2} \left(p^{*}u^{2}+(1-p^{*})d^{2} - p^{*^2}u^{2}-2p^{*}(1-p^{*})du-(1-p^{*})^{2}d^{2} \right) \\
+        Var^{*}\left[X\right] &= \Delta t^{2} \left(u^{2}\left(p^{*}-p^{*^{2}}\right)+d^{2}\left(1-p^{*}-\left(1-p^{*}\right)^{2}\right) -2p^{*}(1-p^{*})du \right) \\
+        Var^{*}\left[X\right] &= \Delta t^{2} \left(u^{2}\left(p^{*}\left(1-p^{*}\right)\right)+d^{2}\left(1-p^{*}-1+2p^{*}-p^{*^{2}}\right) -2p^{*}(1-p^{*})du \right) \\
+        Var^{*}\left[X\right] &= \Delta t^{2} \left(u^{2}\left(p^{*}\left(1-p^{*}\right)\right)+d^{2}\left(p^{*}-p^{*^{2}}\right) -2p^{*}(1-p^{*})du \right) \\
+        Var^{*}\left[X\right] &= \Delta t^{2} \left(u^{2}\left(p^{*}\left(1-p^{*}\right)\right)+d^{2}\left(p^{*}(1-p^{*})\right) -2p^{*}(1-p^{*})du \right) \\
+        Var^{*}\left[X\right] &= \Delta t^{2}\left(p^{*}\left(1-p^{*}\right)\right) \left(u^{2}-2du+d^{2} \right) \\
+        Var^{*}\left[X\right] &= \Delta t^{2}\left(p^{*}\left(1-p^{*}\right)\right) \left(u-d\right)^{2}
+    \end{align*}
+
+    Ahora podemos calcular la desviaci\'on estandar de los retornos:
+
+    \begin{align*}
+        sd(X) &= \sqrt{Var^{*}\left[X\right]} \\
+        sd(X) &= \sqrt{\Delta t^{2}\left(p^{*}\left(1-p^{*}\right)\right) \left(u-d\right)^{2}} \\
+        sd(X) &= \Delta t\left(u- d\right) \sqrt{p^{*}\left(1-p^{*}\right)}
+    \end{align*}
+
+    Ahora anualizamos la desviaci\'on multiplicando por $\sqrt{N}$, donde $N$ es el n\'umero de periodos en el año.
+
+    \begin{align*}
+        sd(X) &= \Delta t\left(u- d\right) \sqrt{p^{*}\left(1-p^{*}\right)}\cdot \sqrt{N} 
+    \end{align*}
+
+    Ademas, si definimos $\Delta t = \frac{1}{N}$
+
+    \begin{align*}
+        sd(X) &= \left(u- d\right) \sqrt{p^{*}\left(1-p^{*}\right)}\cdot \frac{\sqrt{N}}{N} \\
+        sd(X) &= \frac{\left(u- d\right) \sqrt{p^{*}\left(1-p^{*}\right)}}{ \sqrt{N}}
+    \end{align*}
+
+
+    Por el enunciado tenemos entonces que:
+
+    \begin{align*}
+        \frac{\left(u- d\right) \sqrt{p^{*}\left(1-p^{*}\right)}}{ \sqrt{N}} = \sigma_{\text{aapl}}
+    \end{align*}
+
+    Lo que equivale a:
+
+    \begin{align*}
+        u- d = \frac{\sqrt{N}\cdot\sigma_{\text{aapl}}{\sqrt{p^{*}\left(1-p^{*}\right)}} \\
+        u- d = \sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}
+    \end{align*}
+
+    Entonces para la calibraci\'on del modelo tenemos las siguientes 2 ecuaciones:
+
+    \begin{align}
+       u- d &= \sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} \\
+        u - d &= \frac{\left(r  - d\right)}{p^{*}}
+    \end{align}
+
+    Ahora, resolvemos este sistema:
+
+    \begin{align*}
+        u &= \frac{\left(r  - d\right)}{p^{*}} +d\\
+        \frac{\left(r  - d\right)}{p^{*}} +d- d &= \sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} \\
+        \frac{\left(r  - d\right)}{p^{*}} &= \sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} \\
+        \left(r  - d\right) &= p^{*}\sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} \\
+        d &=r- p^{*}\sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}}
+    \end{align*}
+
+    \begin{align*}
+        u &= \sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} + d\\
+        u &= \sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} + r- \sqrt{\frac{N \cdot p^{*}}{\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}}\\
+        u &= r + \sqrt{\frac{N}{\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}}\left(\frac{1}{\sqrt{p^{*}}} -\sqrt{p^{*}}\right)\\
+        u &= r + \sqrt{\frac{N}{\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}}\left(\frac{1-p}{\sqrt{p^{*}}}\right) \\
+        u &= r + \left({1-p^{*}}\right)\sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}}
+    \end{align*}
+
+    Concluimos entonces:
+    \begin{align}
+        u &= r + \left({1-p^{*}}\right)\sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} \\
+        d &=r- p^{*}\sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}}
+    \end{align}
+    
+    
+\end{document}
+
+
+
