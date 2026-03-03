@@ -1,0 +1,47 @@
+\begin{table}[!h]
+\centering
+\caption{\label{tab:tab:parameters}Model Parameters -- Binomial Tree Option Pricing}
+\centering
+\begin{tabular}[t]{lllr}
+\toprule
+Category & Parameter & Symbol & Value\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Market \& Tree}}\\
+\hspace{1em}Market \& Tree & Initial stock price & $S_0$ & 300.000000\\
+\cmidrule{1-4}
+\hspace{1em} & Steps (periods) & $n$ & 12.000000\\
+
+\hspace{1em} & Time step & $\delta$ & 0.083300\\
+
+\hspace{1em} & Risk-neutral prob. & $q^*$ & 0.500000\\
+
+\hspace{1em}\multirow{-4}{*}{\raggedright\arraybackslash } & Risk-free rate & $r$ & 0.040000\\
+\cmidrule{1-4}
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Volatility}}\\
+\hspace{1em}Volatility & Trading days/year & -- & 252.000000\\
+\cmidrule{1-4}
+\hspace{1em} & Annualized volatility & $\sigma$ & 0.320000\\
+
+\hspace{1em} & Up factor & $u$ & 1.148513\\
+
+\hspace{1em}\multirow{-3}{*}{\raggedright\arraybackslash } & Down factor & $d$ & -1.068513\\
+\cmidrule{1-4}
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Bond}}\\
+\hspace{1em}Bond & Initial bond price & $B_0$ & 100.000000\\
+\cmidrule{1-4}
+\hspace{1em} & Bond growth rate & $r$ & 0.040000\\
+\cmidrule{1-4}
+\addlinespace[0.3em]
+\multicolumn{4}{l}{\textbf{Options}}\\
+\hspace{1em}Options & Strike (Put Am. \& KO) & $K$ & 300.000000\\
+\cmidrule{1-4}
+\hspace{1em} & Knock-out barrier & $KO$ & 240.000000\\
+
+\hspace{1em}\multirow{-2}{*}{\raggedright\arraybackslash } & Strike (Chooser) & $K$ & 310.000000\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}\textit{Notes:} All options have maturity $T = 1$ year. Volatility corresponds to AAPL over 2025-01-01 to 2026-02-13.}\\
+\end{tabular}
+\end{table}

@@ -2,13 +2,19 @@ rm(list = ls())
 
 # Cargamos funciones
 source(file = "code\\Scripts\\functions\\utils.R")
+source(file = "code\\Scripts\\functions\\calibracion.R")
+source(file = "code\\Scripts\\functions\\valoracion_opciones.R")
+source(file = "code\\Scripts\\functions\\tables.R")
 
 # Cargar librerías
 pkg  <- c(
     "reticulate",
     "readxl",
     "dplyr",
-    "tidyverse"
+    "tidyverse",
+    "ggplot2",
+    "knitr",
+    "kableExtra"
 )
 
 load_packages(pkg)
@@ -36,36 +42,53 @@ n  <- 12
 delta  <- 1 / n
 q_star  <-  0.5
 r  <- 0.04
-s_bono  <- 100
-dias_por_ano  <- 360
+b_0  <- 100
+dias_por_ano  <- 252
 
 # Calculamos la serie de precios del bono
-s_bono_k  <- s_bono * exp(r * (0:(n - 1)) * delta)
 
-df_bono  <- data.frame(
-    k = 0:(n - 1),
-    precio = s_bono_k
-)
+bono <- construir_serie_bono(b_0, r, n, delta)
 
 # Calculamos el retorno logaritmico
 df_apple  <- df_apple  %>%
     arrange(Date)  %>%
-    mutate(log_return = log(Close / lag(Close)))  %>% 
+    mutate(log_return = log(Close / lag(Close)))  %>%
     drop_na()
 
-# Calculamos el retorno logaritmico anualizado
-df_apple  <- df_apple  %>%
-    mutate(log_return_annualized_SG = log_return * dias_por_ano,
-            log_return_annualized_NL = log(Close/lag(Close, n = dias_por_ano)))  %>% 
-            drop_na()
+df_apple <- df_apple[df_apple$Date <= "2026-02-13",]
+
+df_apple <- df_apple[df_apple$Date >= "2025-01-01",]
 
 # Calculamos la volatilidad anualizada
+#sd_yearly  <- sd(df_apple$log_return) * sqrt(dias_por_ano)
 
-cat("\nVolatilidad anualizada: sd(log(Close/Close_{-1}))*sqrt(", dias_por_ano, "):\n")
-sd(df_apple$log_return) * sqrt(dias_por_ano)
+sd_yearly <- 0.32
+cat("La volatilidad anualizada del retorno logarítmico de las acciones de Apple es:", sd_yearly, "\n")
 
-cat("\nVolatilidad anualizada: sd(log_return * (", dias_por_ano, ")):\n")
-sd(df_apple$log_return_annualized_SG)
+u <- calcular_u(r, q_star, n, sd_yearly)
+d <- calcular_d(r, q_star, n, sd_yearly)
 
-cat("\nVolatilidad anualizada: sd(log(Close/Close_{", dias_por_ano, "}))\n")
-sd(df_apple$log_return_annualized_NL)
+u
+d
+
+calibration_table(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly, u, d, b_0, ko)
+
+# Calculamos el precio de la accion de booble en cada nodo
+arbol_booble <- construir_arbol_accion(s_0, u, d, n, delta)
+
+# Put Americana con Expiracion a 1 año y strike 300
+k <- 300
+
+arbol_a <- valorar_opcion(arbol_booble, "PUTAM", n, q_star, r, delta, k)
+
+# Put Americana con Expiracion a 1 año, strike 300 y ko 240
+k <- 300
+ko <- 240
+
+arbol_b <- valorar_opcion(arbol_booble, "PUTAM", n, q_star, r, delta, k, ko)
+
+arbol_bb <- valorar_opcion(arbol_booble, "PUTEU", n, q_star, r, delta, k, ko)
+
+# Chooser ar the money
+k <- 310
+arbol_b <- valorar_opcion(arbol_booble, "CHOOSER", n, q_star, r, delta, k, ko)
