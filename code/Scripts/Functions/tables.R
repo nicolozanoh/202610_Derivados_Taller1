@@ -50,7 +50,7 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
 
 tree_table <- function(arbol, title, file, label){
   arbol_mat <- t(arbol)
-  arbol_mat <- arbol_mat[, ncol(arbol_mat):1]
+  arbol_mat <- arbol_mat[nrow(arbol_mat):1, ncol(arbol_mat):1]
   
   # Reemplazar NA con cadena vacía para presentación
   arbol_display <- apply(arbol_mat, 2, function(col) {
