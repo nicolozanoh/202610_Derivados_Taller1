@@ -52,7 +52,7 @@ bono <- construir_serie_bono(b_0, r, n, delta)
 # Calculamos el retorno logaritmico
 df_apple  <- df_apple  %>%
     arrange(Date)  %>%
-    mutate(log_return = log(Close / lag(Close)))  %>
+    mutate(log_return = log(Close / lag(Close)))  %>%
     drop_na()
 
 df_apple <- df_apple[df_apple$Date <= "2026-02-13",]
@@ -61,8 +61,7 @@ df_apple <- df_apple[df_apple$Date >= "2005-01-01",]
 
 # Calculamos la volatilidad anualizada
 sd_yearly  <- sd(df_apple$log_return) * sqrt(dias_por_ano)
-
-#sd_yearly <- 0.32
+print(sd_yearly)
 cat("La volatilidad anualizada del retorno logarítmico de las acciones de Apple es:", sd_yearly, "\n")
 
 u <- calcular_u(r, q_star, n, sd_yearly)
