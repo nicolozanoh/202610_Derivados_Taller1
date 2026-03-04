@@ -513,7 +513,41 @@ TLR_{t+h} = SOFR_{t+h} + \frac{ln\left(\frac{F_{t+h}}{TRM_t}\right)}{\left(\frac
 
 Dónde la tasa SOFR respresentá los precios medios de sus swaps, la TRM un valor de 3.665 y los días entre t y h se tomaron como la cantidad de días entre el 13 de febrero y el día del mes del vencimiento del forward encontrado \footnote{Si bien el ejercicio asume que las transacciones se dan el último día de cada mes, para el cálculo de la tasa se tomaron solamente los días hasta que se venciera el futuro encontrado para el mes en cuestión, dado que en las fuentes de información consultadas tendía a ofrecerse un solo vencimiento para cada mes}.\\
 
-Este despeje se realizó hasta agosto, mes a partir del cual, no se encontraron contratos futuros o forwards disponibles, sino hasta diciembre a través de la plataforma de la Bolsa de Valores de Colombia. Para diciembre, se realizó el cálculo de la tasa de la misma manera descrita anteriormente utilizada hasta agosto. Para los meses entre septiembre y noviembre, se realizó una interpolación lineal en las tasas libres de riesgo en pesos, procedimiento que ya se había aplicado para encontrar el precio forward del dólar en octubre para terminar de conformar el portafolio en la primera tabla. Sin embargo, en ese ejercicio previo se habían interpolado las tasas de las operaciones Bid, en este caso se realiza la interpolación con el punto medio entre las tasas Bid y Ask.\\
+Este despeje se realizó hasta agosto, mes a partir del cual, no se encontraron contratos futuros o forwards disponibles, sino hasta diciembre a través de la plataforma de la Bolsa de Valores de Colombia. Para diciembre, se realizó el cálculo de la tasa de la misma manera descrita anteriormente. Para los meses entre septiembre y noviembre, se realizó una interpolación lineal en las tasas libres de riesgo en pesos, procedimiento que ya se había aplicado para encontrar el precio forward del dólar en octubre para terminar de conformar el portafolio en la primera tabla. Sin embargo, en ese ejercicio previo se habían interpolado las tasas de las operaciones Bid, en este caso se realiza la interpolación con el punto medio entre las tasas Bid y Ask.\\
+
+A continuación, las tasas implícitas resultantes:\\
+
+\begin{table}[H]
+\centering
+\caption{Forward, tasa SOFR e implícita en pesos (2026)\footnotemark}
+\scriptsize
+\renewcommand{\arraystretch}{1.2}
+
+\begin{tabular}{l|r r|r}
+\toprule
+\textbf{Mes} &
+\textbf{Fwd TRM} &
+\textbf{Swap SOFR} &
+\textbf{Tasa implícita pesos} \\
+\midrule
+
+feb-26 & 3.665 & 3,66\% & 0,00\% \\
+mar-26 & 3.678 & 3,66\% & 7,51\% \\
+abr-26 & 3.703 & 3,66\% & 9,24\% \\
+may-26 & 3.729 & 3,65\% & 10,24\% \\
+jun-26 & 3.755 & 3,64\% & 10,71\% \\
+jul-26 & 3.783 & 3,62\% & 10,92\% \\
+ago-26 & 3.810 & 3,58\% & 11,06\% \\
+\textit{sep-26} & \textit{3.834} & \textit{3,56\%} & \textit{11,16\%} \\
+\textit{oct-26} & \textit{3.861} & \textit{3,52\%} & \textit{11,26\%} \\
+\textit{nov-26} & \textit{3.888} & \textit{3,49\%} & \textit{11,36\%} \\
+dic-26 & 3.932 & 3,46\% & 11,46\% \\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+
 
 Teniendo en cuenta las anteriores consideraciones, se procede a continuación a presentar los resultados de las utilidades incluyendo los costos, las tasas libres de riesgo y el resultado de la utilidad certera en valor presente para el 2026.
 
