@@ -612,12 +612,13 @@ De esta manera, se concluye que, el valor completo en pesos de la utilidad en va
         d &= 0.04 - 2\sqrt{3}\cdot\sigma_{\text{aapl}} 
     \end{align}
 
-    Una vez calculados los par\'ametros $u$ y $d$ se calculo el arbol binomial para la acci\'on de Booble, el cual se puede observar en el Cuadro 12.
+    Una vez calculados los par\'ametros $u$ y $d$ se calculo el arbol binomial para la acci\'on de Booble, el cual se puede observar en el Cuadro \ref{tab:subyacente}, y sirve como insumo para el calculo de cada una de las opciones a continuaci\'on.
 
-    
     \input{output/arbol_subyacente}
     
     \subsection{Valoraci\'on opci\'on put americana}
+
+    
     
     \input{output/arbol_puntoa_ame}
 
@@ -627,6 +628,15 @@ De esta manera, se concluye que, el valor completo en pesos de la utilidad en va
 
     \subsection{Valoraci\'on \emph{chooser at-the-money}}
 
+    Finalmente se valoro una opci\'on \emph{chooser at-the-money}, con strike $310$ y shout de $6$ meses. Este instrumento permite a la parte larga a escoger en un tiempo futuro (en este caso 6 meses) si la opci\'on adquirida es put o call. Dando as\'i un plaz
+
+    \input{output/arbol_call_c}
+
+    \input{output/arbol_put_c}
+    
+    \input{output/arbol_c}
+
+    
     \newpage
     
     \section*{Anexo}
