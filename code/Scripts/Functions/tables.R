@@ -57,7 +57,7 @@ tree_table <- function(arbol, title, file){
   })
   
   arbol_display <- as.data.frame(arbol_display)
-  colnames(arbol_display) <- paste0("$t_", 0:12, "$")
+  colnames(arbol_display) <- paste0("$t_{", 0:12, "}$")
   rownames(arbol_display) <- NULL
   
   latex_arbol <- kable(
@@ -75,6 +75,5 @@ tree_table <- function(arbol, title, file){
     ) %>%
     add_header_above(c("Paso" = 13), escape = FALSE)
   
-  cat(latex_arbol)
   writeLines(latex_arbol, paste0("output/", file,".tex"))
 }

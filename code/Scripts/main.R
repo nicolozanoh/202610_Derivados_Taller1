@@ -85,7 +85,7 @@ ko <- 240
 
 arbol_b <- valorar_opcion(arbol_booble, "PUTAM", n, q_star, r, delta, k, ko)
 
-arbol_bb <- valorar_opcion(arbol_booble, "PUTEU", n, q_star, r, delta, k, ko)
+arbol_b_eur <- valorar_opcion(arbol_booble, "PUTEU", n, q_star, r, delta, k, ko)
 
 # Chooser ar the money
 #k <- 310
@@ -95,5 +95,5 @@ arbol_bb <- valorar_opcion(arbol_booble, "PUTEU", n, q_star, r, delta, k, ko)
 
 calibration_table(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly, u, d, b_0, ko)
 tree_table(arbol_booble, "Precio del Subyacente", "arbol_subyacente")
-tree_table(arbol_a, "Opci\'on Americana", "arbol_puntoa")
-#tree_table(arbol_b_eur)
+tree_table(arbol_a, "Opción Americana", "arbol_puntoa")
+tree_table(arbol_b_eur,"Opción Americana", "arbol_puntob_eur")
