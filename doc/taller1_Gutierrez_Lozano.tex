@@ -104,7 +104,7 @@
 6 & Forward FX & En corto & abr-26 & 3.605 & COP/USD & 16.148.160 & USD & -- \\ 
 7 & Forward FX  & En corto & jun-26 & 3.657 & COP/USD & 22.877.550 & USD & -- \\ 
 8 & Forward FX & En corto & ago-26 & 3.711 & COP/USD & 17.924.550 & USD & -- \\ 
-9 & Forward/Futuro FX & En corto & oct-26 & 3.802 & COP/USD & 19.065.360 & USD & -- \\ 
+9 & Forward/Futuro FX & En corto & oct-26 & 3.797 & COP/USD & 19.065.360 & USD & -- \\ 
 10 & Futuro FX & En corto & dic-26 & 3.932 & COP/USD & 15.551.400 & USD & -- \\ 
 
 \midrule
@@ -117,7 +117,7 @@
 \end{table}
 \footnotetext{En general en este documento, se tomará para valores númericos el simbolo coma (,) como un décimal y el punto (.) como un seprador de miles.}
 
-La anterior tabla indica que fueron 11 instrumentos financieros en total adquiridos el pasado 13 de febrero con el fin de llevar a cabo la estrategia de cobertura. Cabe resaltar que el activo número 12 se consideraba como ya adquirido previamente por la Compañía GOLD, a través del acuerdo con la joyería de Houston. Cabe resaltar también que las posiciones descritas como "En corto" equivalen a transar los futuros o forwards desde el "Bid" y no desde el "ask", lo que se entiende como un compromiso de vender oro en el futuro al precio forward (fwd) registrado. Así como la columna de "Precio fwd o stk" en el caso de las opciones, registra el valor strike pactado en el contrato.\\
+La anterior tabla indica que fueron 11 instrumentos financieros en total adquiridos el pasado 13 de febrero con el fin de llevar a cabo la estrategia de cobertura. Cabe resaltar que el activo número 12 se consideraba como ya adquirido previamente por la Compañía GOLD, a través del acuerdo con la joyería de Houston. Cabe resaltar también que las posiciones descritas como "En corto" equivalen a transar los futuros o forwards desde el Bid y no desde el ask, lo que se entiende como un compromiso de vender oro en el futuro al precio forward (fwd) registrado. Así como la columna de "Precio fwd o stk" en el caso de las opciones, registra el valor strike pactado en el contrato.\\
 
 Ahora, antes de revisar como se planean diseñar las transacciones y ejecuciones de los instrumentos a futuro, se revisará en otra tabla, las fuentes y clarificaciones metodológicas que se utilizaron para registrar la información de cada instrumento del portafolio:
 
@@ -143,7 +143,7 @@ Ahora, antes de revisar como se planean diseñar las transacciones y ejecuciones
 6 & Bloomberg (FX Bid) \\
 7 & Bloomberg (FX Bid) \\
 8 & Bloomberg (FX Bid) \\
-9 & Interpolación a través de combinación lineal de tasa implícita en pesos del forward de octubre y el futuro de diciembre utilizando la SOFR \\
+9 & Interpolación a través de combinación lineal de tasa implícita entre la tasa en pesos resultante del forward de octubre y la del futuro de diciembre utilizando el swap de la SOFR para octubre (3,52\%) \\
 10 & Bolsa de Valores de Colombia (TRMZ26F) \\
 
 \midrule
@@ -433,7 +433,7 @@ Liquidación de futuro oro (4)
 & USD & 3.700 & 5.153 & -3.700 & 0 & 19.065.360 \\
 
 Liquidación futuro (9) venta de dólares 
-&  & 19.065.360 & 3.802 & 0 & 72.494.456.946 & -19.065.360 \\
+&  & 19.065.360 & 3.797 & 0 & 72.494.456.946 & -19.065.360 \\
 
 \midrule
 
@@ -559,7 +559,12 @@ De esta manera, se concluye que, el valor completo en pesos de la utilidad en va
 
     \subsection{Calibraci\'on del modelo.}
 
-    En el anexo puede verificar el proceso mediante el cu\'al se encontraron las formulas para calibrar los par\'ametros $u$ y $d$ del modelo:
+    En el cuadro \ref{tab:parametros} se puede ver el resumen de los par\'ametros utilizados para calibrar el modelo y valorar las opciones requeridas. Adem\'as de los datos dados en el enunciado, se presenta la volatidad anualizada obtenida a partir de la serie historica de retornos para la acci\'on de Apple.
+
+
+    \input{output/parameters_table}
+
+    Para calibrar los par\'ametros $u$ y $d$ se utilizaron las siguientes formulas, derivadas a partir de la definici\'on de probabilidad neutral al riesgo y de la varianza de los retornos logar\'itmicos. El proceso matem\'atico mediante el cual se obtuvieron puede consultarse en el anexo.
 
     \begin{align}
         u &= r + \left({1-p^{*}}\right)\sqrt{\frac{N}{p^{*}\left(1-p^{*}\right)}}\cdot\sigma_{\text{aapl}} \\
@@ -573,7 +578,7 @@ De esta manera, se concluye que, el valor completo en pesos de la utilidad en va
         d &= 0.04 - 2\sqrt{3}\cdot\sigma_{\text{aapl}} 
     \end{align}
 
-    \input{output/parameters_table}
+    Una vez calculados los par\'ametros $u$ y $d$ se calculo el arbol binomial para la acci\'on de Booble.
  
     \subsection{Valoraci\'on opci\'on put americana}
 
