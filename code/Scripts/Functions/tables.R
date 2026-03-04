@@ -48,7 +48,7 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
   writeLines(latex_table, "output/parameters_table.tex")
 }
 
-tree_table <- function(arbol, title){
+tree_table <- function(arbol, title, file){
   arbol_mat <- arbol
   
   # Reemplazar NA con cadena vacía para presentación
@@ -76,5 +76,5 @@ tree_table <- function(arbol, title){
     add_header_above(c("Paso" = 13), escape = FALSE)
   
   cat(latex_arbol)
-  writeLines(latex_arbol, "output/arbol_precios.tex")
+  writeLines(latex_arbol, paste0("output/", file,".tex"))
 }
