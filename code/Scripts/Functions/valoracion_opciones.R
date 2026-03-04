@@ -10,7 +10,6 @@ construir_arbol <- function(n, recombinante = T, chooser = F){
     
   }
   
-  
 }
 
 llenar_pagos_finales <- function(arbol_subyacente, expiracion, arbol_opcion, tipo, k, ko = 0){
@@ -30,13 +29,16 @@ llenar_pagos_finales <- function(arbol_subyacente, expiracion, arbol_opcion, tip
       }
     }
     if (tipo == "CHOOSER"){
-      arbol_opcion[nrow(arbol_opcion),j] = max(0, k - arbol_subyacente[expiracion + 1, j])
+      
+      ## primer elemento es put segundo elemento es call
+      val <- c(max(0, k - arbol_subyacente[expiracion + 1, j]), max(0, arbol_subyacente[expiracion + 1, j] - k))
+      arbol_opcion[[nrow(arbol_opcion),j]] = val
     }
   }
   return(arbol_opcion)
 }
 
-valorar_opcion <- function(arbol_subyacente, tipo, n, p, r, delta, k, ko = 0){
+valorar_opcion <- function(arbol_subyacente, tipo, n, p, r, delta, k, ko = 0, shout = 0){
   
   if (tipo == "PUTAM"){
       arbol <- construir_arbol(n, T)
@@ -45,10 +47,13 @@ valorar_opcion <- function(arbol_subyacente, tipo, n, p, r, delta, k, ko = 0){
       arbol <- valorar_opcion_put_americana(arbol, k, p, r, delta, arbol_subyacente, ko)
   }
   else if (tipo == "CHOOSER"){
-    arbol <- construir_arbol(n, T, T)
+    #arbol_call <- construir_arbol(n, T, T)
+    #arbol_put <- 
     
     arbol <- llenar_pagos_finales(arbol_subyacente, n, arbol, tipo, k, ko)
-    arbol <- valorar_opcion_put_americana(arbol, k, p, r, delta, arbol_subyacente, ko)
+    print(arbol)
+    arbol <- valorar_chooser(arbol, k, p, r, delta, arbol_subyacente, ko, shout)
+    
   }else if (tipo == "PUTEU"){
     arbol <- construir_arbol(n, T)
     
@@ -57,6 +62,33 @@ valorar_opcion <- function(arbol_subyacente, tipo, n, p, r, delta, k, ko = 0){
   }
   return(arbol)
   
+}
+
+valorar_chooser <- function(arbol, k, p, r, delta, arbol_subyacente, ko, shout){
+  cont <- nrow(arbol)
+  for(i in nrow(arbol):shout){
+    for (j in 1:(i-1)){
+      
+      call_up <- arbol_c[i, j + 1][[1]][2]
+      call_down <- arbol_c[i, j][[1]][2]
+      
+      put_up <- arbol_c[i, j+1][[1]][1] 
+      put_down <- arbol_c[i, j][[1]][1] 
+      
+      arbol[i-1, j] = exp(-r*delta)*(p*up + (1-p) * down)
+      
+      val_put <- exp(-r*delta)*(p*put_up + (1-p) * put_down)
+      val_down <- exp(-r*delta)*(p*call_up + (1-p) * call_down)
+      
+      arbol[i-1, j][[1]] = c(val_put, val_call)
+      
+    }
+  }
+  
+  
+  
+  
+  return(arbol)
 }
 
 valorar_opcion_put_americana <- function(arbol, k, p, r, delta, arbol_accion, ko = 0){
@@ -99,4 +131,4 @@ valorar_opcion_put_europea <- function(arbol, k, p, r, delta, arbol_accion, ko =
   
   return(arbol)
   
-}
+} 
