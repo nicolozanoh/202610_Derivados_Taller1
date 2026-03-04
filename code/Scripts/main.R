@@ -104,4 +104,3 @@ tree_table(arbol_b_eur,"Opción Europea con Knockout", "arbol_puntob_eur", "punt
 tree_table(arbol_call, "Opción Call - Chooser", "arbol_call_c", "call_puntoc")
 tree_table(arbol_put, "Opción Put - Chooser", "arbol_put_c", "put_puntoc")
 tree_table(arbol_final, "Opción Chooser", "arbol_c", "puntoc")
-
