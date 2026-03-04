@@ -89,11 +89,20 @@ arbol_b_eur <- valorar_opcion(arbol_booble, "PUTEU", n, q_star, r, delta, k, ko)
 
 # Chooser ar the money
 k <- 310
-arbol_c <- valorar_opcion(arbol_booble, "CHOOSER", n, q_star, r, delta, k, ko)
+shout <- 6
+arboles_c <- valorar_opcion(arbol_booble, "CHOOSER", n, q_star, r, delta, k, ko, 6)
+
+arbol_call <- arboles_c$call
+arbol_put <- arboles_c$put
+arbol_final <- arboles_c$final
 
 # sacamos tablas para el documento
 
 calibration_table(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly, u, d, b_0, ko)
-tree_table(arbol_booble, "Precio del Subyacente", "arbol_subyacente")
-tree_table(arbol_b_am, "Opción Americana", "arbol_puntoa_ame")
-tree_table(arbol_b_eur,"Opción Americana", "arbol_puntob_eur")
+tree_table(arbol_booble, "Precio del Subyacente", "arbol_subyacente", "subyacente")
+tree_table(arbol_b_am, "Opción Americana", "arbol_puntoa_ame", "puntoa")
+tree_table(arbol_b_eur,"Opción Europea con Knockout", "arbol_puntob_eur", "puntob")
+tree_table(arbol_call, "Opción Call - Chooser", "arbol_call_c", "call_puntoc")
+tree_table(arbol_put, "Opción Put - Chooser", "arbol_put_c", "put_puntoc")
+tree_table(arbol_final, "Opción Chooser", "arbol_c", "puntoc")
+

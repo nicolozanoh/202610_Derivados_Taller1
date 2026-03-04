@@ -48,7 +48,7 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
   writeLines(latex_table, "output/parameters_table.tex")
 }
 
-tree_table <- function(arbol, title, file){
+tree_table <- function(arbol, title, file, label){
   arbol_mat <- t(arbol)
   
   # Reemplazar NA con cadena vacía para presentación
@@ -66,7 +66,7 @@ tree_table <- function(arbol, title, file){
     booktabs = TRUE,
     escape   = FALSE,
     caption  = paste("Árbol Binomial --", title),
-    label    = "arbol_precios",
+    label    = label,
     align    = rep("r", 13)
   ) %>%
     kable_styling(
