@@ -21,7 +21,7 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
     Value = c(
       round(s_0,2), round(n), round(delta, 2), round(q_star,2), round(r,2),
       round(dias_por_ano), round(sd_yearly,2), round(u, 2), round(d, 2),
-      round(b_0), round(r),
+      round(b_0), round(r, 2),
       300, ko, 310
     )
   )
@@ -46,4 +46,35 @@ calibration_table <- function(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly,
 
   
   writeLines(latex_table, "output/parameters_table.tex")
+}
+
+tree_table <- function(arbol, title){
+  arbol_mat <- arbol
+  
+  # Reemplazar NA con cadena vacía para presentación
+  arbol_display <- apply(arbol_mat, 2, function(col) {
+    ifelse(is.na(col), "", formatC(col, format = "f", digits = 2))
+  })
+  
+  arbol_display <- as.data.frame(arbol_display)
+  colnames(arbol_display) <- paste0("$t_", 0:12, "$")
+  rownames(arbol_display) <- NULL
+  
+  latex_arbol <- kable(
+    arbol_display,
+    format   = "latex",
+    booktabs = TRUE,
+    escape   = FALSE,
+    caption  = paste("Árbol Binomial --", title),
+    label    = "arbol_precios",
+    align    = rep("r", 13)
+  ) %>%
+    kable_styling(
+      latex_options = c("hold_position", "scale_down"),  # scale_down porque son 13 columnas
+      font_size     = 8
+    ) %>%
+    add_header_above(c("Paso" = 13), escape = FALSE)
+  
+  cat(latex_arbol)
+  writeLines(latex_arbol, "output/arbol_precios.tex")
 }

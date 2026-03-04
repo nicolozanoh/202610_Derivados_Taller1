@@ -94,3 +94,6 @@ arbol_bb <- valorar_opcion(arbol_booble, "PUTEU", n, q_star, r, delta, k, ko)
 # sacamos tablas para el documento
 
 calibration_table(s_0, n, delta, q_star, r, dias_por_ano, sd_yearly, u, d, b_0, ko)
+tree_table(arbol_booble, "Precio del Subyacente")
+tree_table(arbol_a, "Opci\'on Americana")
+tree_table(arbol_b_eur)
