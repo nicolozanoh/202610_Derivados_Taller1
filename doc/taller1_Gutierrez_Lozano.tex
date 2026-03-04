@@ -433,7 +433,7 @@ Liquidación de futuro oro (4)
 & USD & 3.700 & 5.153 & -3.700 & 0 & 19.065.360 \\
 
 Liquidación futuro (9) venta de dólares 
-&  & 19.065.360 & 3.797 & 0 & 72.494.456.946 & -19.065.360 \\
+&  & 19.065.360 & 3.797 & 0 & 72.395.118.287 & -19.065.360 \\
 
 \midrule
 
@@ -442,7 +442,7 @@ Liquidación futuro (9) venta de dólares
 & \textbf{} 
 & \textbf{} 
 & \textbf{0} 
-& \textbf{72.494.456.946} 
+& \textbf{72.395.118.287} 
 & \textbf{0} \\
 
 \bottomrule
@@ -505,15 +505,15 @@ Liquidación futuro (10) venta de dólares
 
  \textbf{Nota metodológica:} Antes de presentar los resultados, se describirá el proceso para el cálculo de las tasas libres de riesgo. En primer lugar se asume que no hay descuento de la operación realizada en febrero, sino que se toman los flujos de este mes como realizados en el día del análisis debido a que ese día se debían comprar las posiciónes, en particular la opción call.\\
  
- Luego, para los meses entre marzo y agosto se utilizó el precio de los forwards del dólar obtenidos de la plataforma Bloomberg. Para obtener este precio, se tomo el punto medio entre el precio de Bid y Ask, considerandolo como la mejor aproximación posible a la Ley de un solo precio. Además, tomar un valor extremo en este rango entre el Bid y el Ask puede arrojar resultados contraintuitivos como tasas negativas. Una vez se tuvo este precio, se utilizó la Paridad Cubierta de Tasas de interés, o la formula de no arbitraje para forwards de divisas, utilizando tasas de interés continuas y constantes, con la tasa del dólar como la SOFR (3,66\%). Con esta aproximación, se despejó la tasa ímplicita en pesos. A continuación, la expresión matemática resultante del despeje.
+ Luego, para los meses entre marzo y agosto se utilizó el precio de los forwards del dólar obtenidos de la plataforma Bloomberg. Para obtener este precio, se tomo el punto medio entre el precio de Bid y Ask, considerandolo como la mejor aproximación posible a la Ley de un solo precio. Además, tomar un valor extremo en este rango entre el Bid y el Ask puede arrojar resultados contraintuitivos como tasas negativas. Una vez se tuvo este precio, se utilizó la Paridad Cubierta de Tasas de interés, o la formula de no arbitraje para forwards de divisas, utilizando tasas de interés continuas y constantes, con la tasa del dólar como la SOFR, o para ser más precisos los swaps de la tasa SOFR a cada uno de los plazos, disponibles en Bloomberg. Con esta aproximación, se despejó la tasa ímplicita en pesos. A continuación, la expresión matemática resultante del despeje.
 
 \[
-TLR_{t+h} = SOFR_t + \frac{ln\left(\frac{F_{t+h}}{TRM_t}\right)}{\left(\frac{\text{Días entre }_t\text{y}_h}{365}\right)}
+TLR_{t+h} = SOFR_{t+h} + \frac{ln\left(\frac{F_{t+h}}{TRM_t}\right)}{\left(\frac{\text{Días entre }_t\text{y}_h}{365}\right)}
 \]
 
-Dónde la tasa SOFR presentó un valor de 3,66\%, la TRM un valor de 3.665 y los días entre t y h se tomaron como la cantidad de días entre el 13 de febrero y el día del mes del vencimiento del forward encontrado \footnote{Si bien el ejercicio asume que las transacciones se dan el último día de cada mes, para el cálculo de la tasa se tomaron solamente los días hasta que se venciera el futuro encontrado para el mes en cuestión, dado que en las fuentes de información consultadas tendía a ofrecerse un solo vencimiento para cada mes}.\\
+Dónde la tasa SOFR respresentá los precios medios de sus swaps, la TRM un valor de 3.665 y los días entre t y h se tomaron como la cantidad de días entre el 13 de febrero y el día del mes del vencimiento del forward encontrado \footnote{Si bien el ejercicio asume que las transacciones se dan el último día de cada mes, para el cálculo de la tasa se tomaron solamente los días hasta que se venciera el futuro encontrado para el mes en cuestión, dado que en las fuentes de información consultadas tendía a ofrecerse un solo vencimiento para cada mes}.\\
 
-Entre los siguientes meses, no se encontraron contratos futuros o forwards disponibles, sino hasta diciembre a través de la plataforma de la Bolsa de Valores de Colombia, mes para el cúal se realizó el cálculo de la tasa de la misma manera descrita anteriormente utilizada hasta agosto. Para los meses entre septiembre y noviembre, se realizó una interpolación lineal en las tasas libres de riesgo en pesos, procedimiento que ya se había aplicado para encontrar el precio forward del dólar en octubre para terminar de conformar el portafolio en la primera tabla. Sin embargo, en ese ejercicio previo se habían interpolado las tasas de las operaciones Bid, en este caso se realiza la interpolación con el punto medio entre las tasas Bid y Ask.\\
+Este despeje se realizó hasta agosto, mes a partir del cual, no se encontraron contratos futuros o forwards disponibles, sino hasta diciembre a través de la plataforma de la Bolsa de Valores de Colombia. Para diciembre, se realizó el cálculo de la tasa de la misma manera descrita anteriormente utilizada hasta agosto. Para los meses entre septiembre y noviembre, se realizó una interpolación lineal en las tasas libres de riesgo en pesos, procedimiento que ya se había aplicado para encontrar el precio forward del dólar en octubre para terminar de conformar el portafolio en la primera tabla. Sin embargo, en ese ejercicio previo se habían interpolado las tasas de las operaciones Bid, en este caso se realiza la interpolación con el punto medio entre las tasas Bid y Ask.\\
 
 Teniendo en cuenta las anteriores consideraciones, se procede a continuación a presentar los resultados de las utilidades incluyendo los costos, las tasas libres de riesgo y el resultado de la utilidad certera en valor presente para el 2026.
 
@@ -538,7 +538,7 @@ jun-26 & 83,66 & 11,25 & 14,70 & 57,71 & 3.755 & 10,67\% & 55,45 \\
 jul-26 & - & - & 14,70 & -14,70 & 3.783 & 10,91\% & -13,98 \\
 ago-26 & 66,53 & 8,75 & 14,70 & 43,08 & 3.810 & 11,08\% & 40,55 \\
 sep-26 & - & - & 14,70 & -14,70 & 3.837 & 11,27\% & -13,70 \\
-oct-26 & 72,49 & 9,25 & 14,70 & 48,54 & 3.867 & 11,47\% & 44,74 \\
+oct-26 & 72,40 & 9,25 & 14,70 & 48,54 & 3.867 & 11,47\% & 44,74 \\
 nov-26 & - & - & 14,70 & -14,70 & 3.897 & 11,66\% & -13,40 \\
 dic-26 & 61,15 & 7,50 & 14,70 & 38,95 & 3.932 & 11,85\% & 35,09 \\
 \hline
@@ -579,8 +579,12 @@ De esta manera, se concluye que, el valor completo en pesos de la utilidad en va
     \end{align}
 
     Una vez calculados los par\'ametros $u$ y $d$ se calculo el arbol binomial para la acci\'on de Booble.
+
+    
  
     \subsection{Valoraci\'on opci\'on put americana}
+
+    \input{output/arbol_precios}
 
     \subsection{Valoraci\'on opci\'on put con knockout}
 
